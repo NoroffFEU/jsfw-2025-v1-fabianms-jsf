@@ -1,8 +1,8 @@
 function Header() {
-  return <h1>Shop</h1>;
+  return <h1>About</h1>;
 }
 
-export default async function Page() {
+export default async function AboutPage() {
   return (
     <>
       <Header />
