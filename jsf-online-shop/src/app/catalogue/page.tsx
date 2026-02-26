@@ -1,11 +1,7 @@
-function Header() {
-  return <h1>Catalogue</h1>;
-}
-
-export default async function CataloguePage() {
+export default function Catalogue() {
   return (
-    <>
-      <Header />
-    </>
+    <main className="p-10">
+      <h1 className="text-4xl font-bold">Catalogue</h1>
+    </main>
   );
 }

@@ -1,11 +1,7 @@
-function Header() {
-  return <h1>About</h1>;
-}
-
-export default async function AboutPage() {
+export default function Contact() {
   return (
-    <>
-      <Header />
-    </>
+    <main className="p-10">
+      <h1 className="text-4xl font-bold">Contact</h1>
+    </main>
   );
 }

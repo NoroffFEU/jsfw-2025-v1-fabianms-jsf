@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,32 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <header
-          style={{
-            padding: "1rem",
-            backgroundColor: "#f0f0f0",
-            marginBottom: "1rem",
-          }}
-        >
-          <nav>
-            <Link href="/" style={{ marginRight: "10px" }}>
-              Hjem
-            </Link>
-            <Link href="/catalogue" style={{ marginRight: "10px" }}>
-              Om Oss
-            </Link>
-            {/*homepage*/}
-            <Link href="/contact" style={{ marginRight: "10px" }}>
-              Tjenester
-            </Link>
-            <Link href="/contact" style={{ marginRight: "10px" }}>
-              Tjenester
-            </Link>
-            {/* Link to a dynamic blog post example */}
-            <Link href="/blog/itemid">Blogginnlegg Eksempel</Link>
-          </nav>
-        </header>
+        <Header />
+
         <main>{children}</main>
+
         <footer
           style={{
             padding: "1rem",
@@ -60,10 +38,7 @@ export default function RootLayout({
             textAlign: "center",
           }}
         >
-          <p>
-            &copy; {new Date().getFullYear()} Mitt Prosjekt AS. Alle rettigheter
-            reservert.
-          </p>
+          <p>&copy; {new Date().getFullYear()} Mitt Prosjekt AS.</p>
         </footer>
       </body>
     </html>

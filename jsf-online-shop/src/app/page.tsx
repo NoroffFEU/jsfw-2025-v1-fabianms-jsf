@@ -1,11 +1,7 @@
-function Header() {
-  return <h1>Shop</h1>;
-}
-
-export default async function Page() {
+export default function HomePage() {
   return (
-    <>
-      <Header />
-    </>
+    <main className="p-10">
+      <h1 className="text-4xl font-bold">the Shop</h1>
+    </main>
   );
 }
