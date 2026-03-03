@@ -30,14 +30,7 @@ export default function RootLayout({
 
         <main>{children}</main>
 
-        <footer
-          style={{
-            padding: "1rem",
-            backgroundColor: "#f0f0f0",
-            marginTop: "1rem",
-            textAlign: "center",
-          }}
-        >
+        <footer className="p-1 bg-sky-500 align-text">
           <p>&copy; {new Date().getFullYear()} Mitt Prosjekt AS.</p>
         </footer>
       </body>
