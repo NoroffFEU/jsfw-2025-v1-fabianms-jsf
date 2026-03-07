@@ -1,3 +1,5 @@
+"use client";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
 interface Review {
@@ -26,32 +28,70 @@ interface ApiResponse {
   data: Product[];
 }
 
-export default async function Catalogue() {
-  const response = await fetch("https://v2.api.noroff.dev/online-shop");
+export default function Catalogue() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [sortBy, setSortBy] = useState<string>("default");
 
-  if (!response.ok) {
-    return (
-      <p>Oops, trouble loading the products Status Code: {response.status}</p>
-    );
-  }
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("https://v2.api.noroff.dev/online-shop");
+        const result: ApiResponse = await response.json();
+        setProducts(result.data);
+      } catch (error) {
+        console.error("Error fetching products", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
 
-  const result: ApiResponse = await response.json();
-  const products = result.data;
+  const sortedProducts = [...products].sort((a, b) => {
+    if (sortBy === "price-low") {
+      return a.discountedPrice - b.discountedPrice;
+    }
+    if (sortBy === "price-high") {
+      return b.discountedPrice - a.discountedPrice;
+    }
+    return 0;
+  });
+
+  if (loading)
+    return <p className="p-10 text-center font-bold">Loading Catalogue...</p>;
 
   return (
-    <main className=" bg-mist-300">
+    <main className=" bg-mist-300 min-h-screen">
       <div className="p-8 space-y-20 max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8 border-b-4 border-sky-950 pb-2">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-8 border-b-4 border-sky-950 pb-2">
           <h2 className="text-3xl font-black text-sky-950 uppercase">
             Catalogue
           </h2>
+          <div className="flex items-center gap-2">
+            <label
+              htmlFor="sort"
+              className="font-bold text-sky-950 uppercase text-sm"
+            >
+              Sort
+            </label>
+            <select
+              id="sort"
+              className="p-2 border-2 border-sky-950 bg-white text-sky-950 font-bold rounded shadow-[4px_4px_0px_0px_rgba(8,145,178,1)] outline-none"
+              onChange={(e) => setSortBy(e.target.value)}
+            >
+              <option value="default">Featured</option>
+              <option value="price-low">Lowest price</option>
+              <option value="price-high">Highest price</option>
+            </select>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 p-8">
-          {products.map((product) => (
+          {sortedProducts.map((product) => (
             <div
               key={product.id}
-              className="border p-6 rounded-lg shadow bg-sky-950"
+              className="border-4 border-sky-950 p-6 rounded-lg shadow-[8px_8px_0px_0px_rgba(8,145,178,1)] bg-sky-950 text-mist-300"
             >
               <img
                 src={product.image.url}
@@ -59,6 +99,9 @@ export default async function Catalogue() {
                 className="w-full h-64 object-cover mb-4"
               />
               <h2 className="text-2xl font-bold">{product.title}</h2>
+              <h3 className="text-2xl font-black text-white mt-2">
+                {product.discountedPrice} kr
+              </h3>
 
               <p className="text-sm text-blue-600 mb-4">
                 {product.reviews.length} reviews
