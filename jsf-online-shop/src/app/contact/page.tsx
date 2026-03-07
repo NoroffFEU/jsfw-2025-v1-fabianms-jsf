@@ -1,7 +1,10 @@
+import ContactForm from "@/components/ContactForm";
+import Link from "next/link";
+
 export default function Contact() {
   return (
-    <main className="p-10">
-      <h1 className="text-4xl font-bold">Contact</h1>
+    <main className="p-10 bg-mist-300 border-8 border-cyan-700 h-screen">
+      <ContactForm />
     </main>
   );
 }
