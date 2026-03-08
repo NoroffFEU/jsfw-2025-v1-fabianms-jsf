@@ -42,7 +42,7 @@ export default function CartPage() {
               />
               <div>
                 <h2 className="text-xl font-bold t">{item.title}</h2>
-                <p className="text-gray-600">${item.discountedPrice} each</p>
+                <p className="text-gray-600">{item.discountedPrice} kr each</p>
               </div>
             </div>
 
@@ -76,12 +76,11 @@ export default function CartPage() {
 
       <div className="mt-10 p-6 bg-slate-400 rounded-lg flex flex-col items-center">
         <h2 className="text-2xl text-sky-950 font-bold mb-4">
-          Total: ${total.toFixed(2)}
+          Total: {total.toFixed(2)} kr
         </h2>
 
         <Link
           href="/checkout-success"
-          onClick={clearCart}
           className="px-10 py-4 bg-black text-white font-bold rounded hover:bg-gray-800 transition"
         >
           Checkout

@@ -36,7 +36,7 @@ export default function RootLayout({
 
           <main className="min-h-screen">{children}</main>
 
-          <footer className="p-4 bg-sky-500 text-white text-center">
+          <footer className="p-4 bg-sky-950 text-white text-center">
             <p>&copy; {new Date().getFullYear()} JSFW Course Assignment.</p>
           </footer>
         </CartProvider>
